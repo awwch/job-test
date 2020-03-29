@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Task4</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let n = prompt("Введите количество пар скобок", 2);
+			if (!Number.isInteger(parseInt(n))) {
+				n = prompt("Введите число", 2);
+			};
+
+			let result = ""
+
+			function brackets(n, count, check, res) {
+				if ((count == n) && (check.length == 0)) {
+					result += res + "\n"
+				};
+
+				if (count < n) {
+					brackets(n, count + 1, check + "(", res + "(");
+					brackets(n, count + 1, check + "[", res + "[");
+					brackets(n, count + 1, check + "{", res + "{");
+				};
+
+				if (check.length > 0) {
+					if (check.charAt(check.length-1) == "(") {
+						brackets(n, count, check.slice(0, check.length-1), res + ")");
+					};
+					if (check.charAt(check.length-1) == "[") {
+						brackets(n, count, check.slice(0, check.length-1), res + "]");
+					};
+					if (check.charAt(check.length-1) == "{") {
+						brackets(n, count, check.slice(0, check.length-1), res + "}");
+					}
+				};
+			};
+
+			brackets(n, 0, "", "");
+			document.write(result)
+
+			function correctBrackets(text) {
+				while ((text.includes("()")) || (text.includes("[]")) || (text.includes("{}"))) {
+					text = text.replace("()", "");
+					text = text.replace("[]", "");
+					text = text.replace("{}", "");
+					text = text.trim();
+					// console.log(text);
+				console.log(!text);
+				};
+			};
+
+			correctBrackets(result)
+
+		</script>
+	</body>
+</html>
